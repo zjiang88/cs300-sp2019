@@ -204,6 +204,6 @@ public class ShoppingCart{
 					continue;
 				}
 			}
-			scnr.close();
+			//scnr.close();
 		}
 }

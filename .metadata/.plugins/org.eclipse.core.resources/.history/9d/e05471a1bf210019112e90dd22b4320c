@@ -4,14 +4,14 @@
 // Files:     ShoppingCart      
 // Course:    CS300,Spring 2019    
 //
-// Author:    Ziyan Jiang      
-// Email:     zjiang88@wisc.edu
+// Author:    Chengbin Liu      
+// Email:      cliu557@wisc.edu    
 // Lecturer's Name: Gary
 //
 //////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ///////////////////
 //
-// Partner Name:   Chengbin Liu
-// Partner Email:   cliu557@wisc.edu
+// Partner Name:   Ziyan Jiang 
+// Partner Email:   zjiang88@wisc.edu
 // Partner Lecturer's Name: Gary
 // 
 // VERIFY THE FOLLOWING BY PLACING AN X NEXT TO EACH TRUE STATEMENT:
@@ -49,14 +49,7 @@ public class ShoppingCart{
 		{"Cucumber", "$0.79"}, {"Eggs", "$3.09"}, {"Grape", "$2.29"}, {"Ice Cream", "$5.39"},
 		{"Milk", "$2.09"}, {"Mushroom", "$1.79"}, {"Onion", "$0.79"}, {"Pepper", "$1.99"},
 		{"Pizza", "$11.5"}, {"Potato", "$0.69"}, {"Spinach", "$3.09"}, {"Tomato", "$1.79"}};
-		
-		/**
-		 * adds the item with the given its identifier (index) at the end of the cart
-		 * @param index represents the index of item to be added 
-		 * @param cart represents the shopping cart
-		 * @param count  represents the number of market items present in the cart
-		 * @return  updated count
-		 */
+		// adds the item with the given its identifier (index) at the end of the cart
 		public static int add(int index, String[] cart, int count) {
 			if(cart[cart.length-1]!=null) {
 				System.out.println("WARNING: The cart is full. You cannot add any new item.");
@@ -66,14 +59,7 @@ public class ShoppingCart{
 			return count + 1;
 		}
 
-		
-		/**
-		 * 
-		 * @param itemIndex means the index of item
-		 * @param cart represents the shopping cart
-		 * @param count  represents the number of market items present in the cart
-		 * @return Returns how many occurrences of the item with index itemIndex are present in the shopping cart
-		 */
+		// Returns how many occurrences of the item with index itemIndex are present in the shopping cart
 		public static int occurrencesOf(int itemIndex, String[] cart, int count) {
 			int numOfItem = 0;
 			for (int i = 0; i < count; i++) {
@@ -84,15 +70,8 @@ public class ShoppingCart{
 			return numOfItem;
 		}
 
-		
-		/**
-		 * Removes the first (only one) occurrence of itemToRemove if found and returns the number of 
-		 * items in the cart after remove operation is completed either successfully or not
-		 * @param itemToRemove represents the item to be removed 
-		 * @param cart represents the shopping cart
-		 * @param count represents the number of market items present in the cart
-		 * @return count after remove operation
-		 */
+		// Removes the first (only one) occurrence of itemToRemove if found and returns the number of 
+		// items in the cart after remove operation is completed either successfully or not
 		public static int remove(String itemToRemove, String[] cart, int count) {
 			if (count == 0) {
 				System.out.println("cart empty");
@@ -107,8 +86,6 @@ public class ShoppingCart{
 			count--;
 			return count;
 		}
-		
-		
 		/**
 		 * Returns the index of an item within the shopping cart
 		 * 
@@ -126,8 +103,6 @@ public class ShoppingCart{
 			}
 			return -1;
 		}
-		
-		
 		// returns the total value (cost) of the cart without tax in $ (double)
 		public static double getSubTotalPrice(String[] cart, int count) {
 			double totalPrice = 0.0;
@@ -141,7 +116,6 @@ public class ShoppingCart{
 			return Math.round(totalPrice * 100.0) / 100.0;
 		}
 
-		
 		// prints the Market Catalog (item identifiers, description, and unit prices)
 		public static void printMarketCatalog() {
 			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++\n"
@@ -151,7 +125,6 @@ public class ShoppingCart{
 			}
 		}
 
-		
 		// Displays the cart content (items separated by commas)
 		public static void displayCartContent(String[] cart, int count) {
 			System.out.print("Cart Content: ");
@@ -160,8 +133,6 @@ public class ShoppingCart{
 			}
 			System.out.println();
 		}
-		
-		
 		public static void main(String[] args) {
 			String[] cart = new String[CART_CAPACITY];
 			int count = 0;
@@ -204,6 +175,6 @@ public class ShoppingCart{
 					continue;
 				}
 			}
-			scnr.close();
+			//scnr.close();
 		}
 }
