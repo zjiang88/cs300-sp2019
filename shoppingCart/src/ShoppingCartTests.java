@@ -135,6 +135,19 @@ public class ShoppingCartTests {
 		}
 		return testPassed;
 	}
+	public static void testgetSubTotalPrice() {
+		boolean testPassed = true; // evaluated to true if test passed without problems, false otherwise
+		// define the shopping cart as an oversize array of elements of type String
+		// we can set an arbitrary capacity for the cart - for instance 10
+		String[] cart = new String[10]; // shopping cart
+		int count = 0; // number of items present in the cart (initially the cart is empty)
+		count = ShoppingCart.add(3, cart, count);
+		count = ShoppingCart.add(3, cart, count);
+		count = ShoppingCart.add(5, cart, count);
+		System.out.println(ShoppingCart.getSubTotalPrice(cart, count));
+		ShoppingCart.printMarketCatalog();
+		ShoppingCart.displayCartContent(cart, count);
+	}
 	/**
 	 * main method used to call the unit tests
 	 * 
@@ -149,5 +162,6 @@ public class ShoppingCartTests {
 		System.out.println("testAddingTooMuchItems(): " + testAddingTooMuchItems());
 		System.out.println("testRemoveOnlyOneOccurrenceOfItem(): " + testRemoveOnlyOneOccurrenceOfItem());
 		System.out.println("testRemoveItemNotFoundInCart(): " + testRemoveItemNotFoundInCart());
+		testgetSubTotalPrice();
 	}
 }

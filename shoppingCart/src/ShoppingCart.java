@@ -1,3 +1,4 @@
+import java.util.*;
 public class ShoppingCart{
 	// Define final parameters
 	private static final int CART_CAPACITY = 20; // shopping cart max capacity
@@ -53,28 +54,93 @@ public class ShoppingCart{
 			return count;
 		}
 		/**
-		   * Returns the index of an item within the shopping cart
-		   * 
-		   * @param item description
-		   * @param cart Shopping cart
-		   * @param count number of items present in the shopping cart
-		   * @return index of the item within the shopping cart, and -1 if the item does not exist in the
-		   *         cart
-		   */
-		  private static int indexOf(String item, String[] cart, int count) {
-			  for (int i = 0; i < count; i++) {
-				  if (cart[i].equals(item)) {
-					  return i;
-				  }
-			  }
-			  return -1;
-		  }
+		 * Returns the index of an item within the shopping cart
+		 * 
+		 * @param item description
+		 * @param cart Shopping cart
+		 * @param count number of items present in the shopping cart
+		 * @return index of the item within the shopping cart, and -1 if the item does not exist in the
+		 *         cart
+		 */
+		private static int indexOf(String item, String[] cart, int count) {
+			for (int i = 0; i < count; i++) {
+				if (cart[i].equals(item)) {
+					return i;
+				}
+			}
+			return -1;
+		}
 		// returns the total value (cost) of the cart without tax in $ (double)
-		public static double getSubTotalPrice(String[] cart, int count) {}
+		public static double getSubTotalPrice(String[] cart, int count) {
+			double totalPrice = 0.0;
+			for(int i = 0; i < count; i++) {
+				for(int j = 0; j < MARKET_ITEMS.length; j++) {
+					if (cart[i].equals(MARKET_ITEMS[j][0])) {
+						totalPrice = totalPrice + Double.valueOf(MARKET_ITEMS[j][1].substring(1));
+					}
+				}
+			}
+			return Math.round(totalPrice * 100.0) / 100.0;
+		}
 
 		// prints the Market Catalog (item identifiers, description, and unit prices)
-		public static void printMarketCatalog() {}
+		public static void printMarketCatalog() {
+			System.out.println("+++++++++++++++++++++++++++++++++++++++++++++\n"
+					+ "Item id\t\tDescription    \t Price\n" + "+++++++++++++++++++++++++++++++++++++++++++++");
+			for (int i = 0; i < MARKET_ITEMS.length; i++) {
+				System.out.println(i + "\t\t" + MARKET_ITEMS[i][0] + "    \t " + MARKET_ITEMS[i][1]);
+			}
+		}
 
 		// Displays the cart content (items separated by commas)
-		public static void displayCartContent(String[] cart, int count) {}
+		public static void displayCartContent(String[] cart, int count) {
+			System.out.print("Cart Content: ");
+			for(int i = 0; i < count; i++) {
+				System.out.print(cart[i] + ", ");
+			}
+			System.out.println();
+		}
+		public static void main(String[] args) {
+			String[] cart = new String[CART_CAPACITY];
+			int count = 0;
+			System.out.println("=============   Welcome to the Shopping Cart App   =============\n\n");
+			boolean isQuit = false;
+			while(!isQuit) {
+				System.out.println("\nCOMMAND MENU:");
+				System.out.println(" [P] print the market catalog\n" + 
+						" [A <index>] add one occurrence of an item to the cart given its identifier\n" + 
+						" [C] checkout\n" + 
+						" [D] display the cart content\n" + 
+						" [O <index>] number of occurrences of an item in the cart given its identifier\n" + 
+						" [R <index>] remove one occurrence of an item from the cart given its identifier\n" + 
+						" [Q]uit the application");
+				System.out.print("\nENTER COMMAND: ");
+				Scanner scnr = new Scanner(System.in);
+				String in = scnr.next();
+				if(in.toLowerCase().equals("p")) {
+					printMarketCatalog();
+				} else if(in.toLowerCase().equals("a")) {
+					count = add(scnr.nextInt(), cart, count);
+				} else if(in.toLowerCase().equals("c")) {
+					double totalCost = getSubTotalPrice(cart, count) + TAX_RATE * getSubTotalPrice(cart, count);
+					System.out.println("#items: " + count + " Subtotal: $" +  String.format("%.2f", 
+							getSubTotalPrice(cart, count)) + " Tax: $" + String.format("%.2f",TAX_RATE * getSubTotalPrice(cart, count)) + " TOTAL: $" + 
+						    String.format("%.2f", totalCost));
+				} else if(in.toLowerCase().equals("d")) {
+					displayCartContent(cart, count);
+				} else if(in.toLowerCase().equals("o")) {
+					int id = scnr.nextInt();
+					System.out.println("The number of occurrences of " + MARKET_ITEMS[id][0] + " (id #" + id +") is: " + occurrencesOf(id, cart, count));
+				} else if(in.toLowerCase().equals("r")) {
+					count = remove(MARKET_ITEMS[scnr.nextInt()][0], cart, count);
+					
+				} else if(in.toLowerCase().equals("q")){
+					isQuit = true;
+					scnr.close();
+					System.out.println("=============  Thank you for using this App!!!!!  =============");
+				} else {
+					continue;
+				}
+			}
+		}
 }
