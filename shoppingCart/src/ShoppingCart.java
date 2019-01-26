@@ -103,7 +103,7 @@ public class ShoppingCart{
 		public static void main(String[] args) {
 			String[] cart = new String[CART_CAPACITY];
 			int count = 0;
-			System.out.println("=============   Welcome to the Shopping Cart App   =============\n\n");
+			System.out.println("=============   Welcome to the Shopping Cart App   =============\n");
 			boolean isQuit = false;
 			while(!isQuit) {
 				System.out.println("\nCOMMAND MENU:");
